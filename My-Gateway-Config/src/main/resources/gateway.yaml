@@ -5,5 +5,7 @@ my:
         uri: aaa.com/**
         serviceName: "用户服务"
         order: 0
-
+    configCenter:
+      nacosConfig:
+        namespace: aaa
 

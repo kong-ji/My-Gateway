@@ -1,16 +1,16 @@
-package config.lib.config;
+package enums;
 
 import lombok.Getter;
 
 @Getter
-public enum ConfigCenter {
+public enum RegisterCenterEnum {
 
     NACOS("nacos"),
     ZOOKEEPER("zookeeper");
 
     private final String des;
 
-    ConfigCenter(String des) {
+    RegisterCenterEnum(String des) {
         this.des = des;
     }
 

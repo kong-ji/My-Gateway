@@ -1,7 +1,5 @@
 package config;
 
-import config.lib.config.ConfigCenter;
-import config.lib.config.RegisterCenter;
 import lombok.Data;
 import pojo.RouteDefinition;
 
@@ -31,22 +29,20 @@ public class Config {
     /**
      * 配置中心
      */
-    private ConfigCenter configCenter = ConfigCenter.NACOS; // 配置中心实现
-    private String configAddress = "192.168.150.102:8848"; // 配置中心地址
+    private ConfigCenter configCenter = new ConfigCenter();
+
 
     /**
      * 注册中心
      */
-    private RegisterCenter registerCenter = RegisterCenter.NACOS; // 注册中心实现
-    private String registerAddress = "192.168.150.102:8848"; // 注册中心地址
+    private RegisterCenter registerCenter = new RegisterCenter();
+
 
 
     /**
      * netty相关配置
      */
-    private int eventLoopGroupBossNum = 1;
-    private int eventLoopGroupWorkerNum = Runtime.getRuntime().availableProcessors();
-    private int maxContentLength = 64 * 1024 * 1024; // 64MB
+    NettyConfig nettyConfig = new NettyConfig();
 
     /**
      * 路由配置列表
