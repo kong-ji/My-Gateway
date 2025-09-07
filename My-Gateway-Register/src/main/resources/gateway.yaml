@@ -1,19 +1,20 @@
 my:
   gateway:
+    port: 9999
     name: gateway-1
     configCenter:
       enable: true
       type: NACOS
       address: 192.168.150.102:8848
       nacos:
-        namespace: 7a552eec-cda7-41d5-b020-f73e8d3b8609
+        namespace: 8a43b98a-7471-4922-83e4-b6aa9b6a99fd
         group: GATEWAY_GROUP
-        dataId: my-gateway
+        dataId: my-gateway-data
     registerCenter:
       type: NACOS
       address: 192.168.150.102:8848
       nacos:
-        namespace: 7a552eec-cda7-41d5-b020-f73e8d3b8609
+        namespace: 8a43b98a-7471-4922-83e4-b6aa9b6a99fd
         group: GATEWAY_GROUP
 
     routes:

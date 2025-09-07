@@ -14,4 +14,13 @@
 
     <description>注册模块，注册服务与服务发现</description>
 
+    <dependencies>
+
+        <dependency>
+            <groupId>com.kongji</groupId>
+            <artifactId>My-Gateway-Config</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+    </dependencies>
 </project>

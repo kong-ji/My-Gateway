@@ -31,7 +31,8 @@
         <nacos.version>2.2.0</nacos.version>
         <logback.version>1.1.7</logback.version>
         <fastjson.verson>1.2.76</fastjson.verson>
-
+        <commons-beanutils.version>1.9.4</commons-beanutils.version>
+        <hutool.version>5.8.26</hutool.version>
 
     </properties>
 
@@ -69,5 +70,38 @@
             <version>${logback.version}</version>
         </dependency>
 
+        <!--json解析-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-yaml</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.verson}</version>
+        </dependency>
+
+        <!--对象转换工具-->
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>${commons-beanutils.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>${hutool.version}</version>
+        </dependency>
     </dependencies>
 </project>

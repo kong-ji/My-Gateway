@@ -5,6 +5,8 @@ import pojo.RouteDefinition;
 
 import java.util.List;
 
+import static constant.ConfigConstant.*;
+
 /**
  * 网关静态配置类
  * 包含网关的所有核心配置信息，包括基本信息、配置中心、注册中心、Netty服务器、HTTP客户端和路由配置等
@@ -12,18 +14,24 @@ import java.util.List;
  */
 @Data
 public class Config {
-    //TODO 暂时硬编码
+
+    /**
+     * 网关服务名称
+     * 用于标识网关实例
+     */
+    private String name = DEFAULT_NAME;
+
     /**
      * 网关服务端口
      * 网关监听的HTTP端口
      */
-    private int port = 9999;
-    
+    private int port = DEFAULT_PORT;
+
     /**
      * 环境标识
      * 用于区分开发、测试、生产等不同环境
      */
-    private String env = "dev";
+    private String env = DEFAULT_ENV;
 
 
     /**
