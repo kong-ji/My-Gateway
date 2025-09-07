@@ -6,6 +6,10 @@ my:
         serviceName: "用户服务"
         order: 0
     configCenter:
+      enabled: true
       nacosConfig:
         namespace: aaa
+        dataId: 123456
+        group: default
+        timeout: 1000
 
