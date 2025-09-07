@@ -1,9 +1,12 @@
 package service.impl.nacos;
 
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.alibaba.nacos.api.NacosFactory;
 import com.alibaba.nacos.api.PropertyKeyConst;
 import com.alibaba.nacos.api.config.ConfigService;
+import com.alibaba.nacos.api.config.listener.Listener;
 import com.alibaba.nacos.api.exception.NacosException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import config.ConfigCenter;
@@ -12,11 +15,14 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import pojo.RouteDefinition;
 import service.ConfigCenterProcessor;
 import service.RoutesChangeListener;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.concurrent.Executor;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
@@ -77,8 +83,38 @@ public class NacosConfigCenter implements ConfigCenterProcessor {
         // 获取Nacos特定配置
         NacosConfig nacos = configCenter.getNacosConfig();
         String configJson = configService.getConfig(nacos.getDataId(), nacos.getGroup(), nacos.getTimeout());
+        /* configJson:
+         * {
+         *     "routes": [
+         *         {
+         *             "id": "test1",
+         *             "serviceName": "user"
+         *         },
+         *         {
+         *             "id": "test2",
+         *             "serviceName": "order"
+         *         }
+         *     ]
+         * }
+         */
         log.info("config from nacos: {}", configJson);
+        //启动时主动拉取一次，通知网关
+        List<RouteDefinition> routes = JSON.parseObject(configJson).getJSONArray("routes").toJavaList(RouteDefinition.class);
+        listener.onRoutesChange(routes);
 
+        configService.addListener(nacos.getDataId(), nacos.getGroup(), new Listener() {
+            @Override
+            public Executor getExecutor() {
+                return null;
+            }
+
+            @Override
+            public void receiveConfigInfo(String configInfo) {
+                log.info("config change from nacos: {}", configInfo);
+                List<RouteDefinition> routes = JSON.parseObject(configJson).getJSONArray("routes").toJavaList(RouteDefinition.class);
+                listener.onRoutesChange(routes);
+            }
+        });
     }
 
     /**
