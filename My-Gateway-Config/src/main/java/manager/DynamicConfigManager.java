@@ -6,6 +6,7 @@ import pojo.ServiceInstance;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -28,6 +29,9 @@ public class DynamicConfigManager {
     // 服务对应的路由
     private final ConcurrentHashMap<String /* 服务名 */, RouteDefinition> serviceNameRouteMap = new ConcurrentHashMap<>();
 
+    // URI对应的路由
+    private final ConcurrentHashMap<String /* URI路径 */, RouteDefinition> uriRouteMap = new ConcurrentHashMap<>();
+
     // 服务
     private final ConcurrentHashMap<String /* 服务名 */, ServiceDefinition> serviceDefinitionMap = new ConcurrentHashMap<>();
 
@@ -45,6 +49,14 @@ public class DynamicConfigManager {
     }
 
     /**
+     * 获取所有URI与路由的映射关系
+     *
+     * @return URI与路由的映射关系集合
+     */
+    public Set<Map.Entry<String, RouteDefinition>> getAllUriEntry() {
+        return uriRouteMap.entrySet();
+    }
+    /**
      * 批量更新路由
      * 可选择是否清除现有路由
      *
@@ -57,12 +69,14 @@ public class DynamicConfigManager {
         if (clear) {
             routeIdRouteMap.clear();
             serviceNameRouteMap.clear();
+            uriRouteMap.clear();
         }
 
         for (RouteDefinition routeDefinition : routes) {
             if (routeDefinition == null) continue;
             routeIdRouteMap.put(routeDefinition.getId(), routeDefinition);
             serviceNameRouteMap.put(routeDefinition.getServiceName(), routeDefinition);
+            uriRouteMap.put(routeDefinition.getUri(), routeDefinition);
         }
     }
 
