@@ -9,11 +9,15 @@ import io.netty.handler.codec.http.cookie.ServerCookieDecoder;
 import lombok.Data;
 import io.netty.handler.codec.http.*;
 import java.nio.charset.Charset;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 import org.asynchttpclient.Request;
 import org.asynchttpclient.RequestBuilder;
 import pojo.ServiceDefinition;
+
+import static constant.BasicConstant.DATE_DEFAULT_FORMATTER;
 
 /**
  * 网关请求
@@ -21,6 +25,13 @@ import pojo.ServiceDefinition;
  */
 @Data
 public class GatewayRequest {
+
+    /**
+     * 请求流水号
+     * 唯一标识一个请求，用于请求追踪和日志记录
+     * 由时间戳和UUID组成，确保全局唯一
+     */
+    private final String id;
 
     /**
      * 服务定义
@@ -120,6 +131,7 @@ public class GatewayRequest {
     private String modifyPath;
 
     public GatewayRequest(ServiceDefinition serviceDefinition, Charset charset, String clientIp, String host, String uri, HttpMethod method, String contentType, HttpHeaders headers, FullHttpRequest fullHttpRequest) {
+        this.id = LocalDateTime.now().format(DateTimeFormatter.ofPattern(DATE_DEFAULT_FORMATTER)) + "---" + UUID.randomUUID();
         this.serviceDefinition = serviceDefinition;
         this.beginTime = System.currentTimeMillis();
         this.charset = charset;

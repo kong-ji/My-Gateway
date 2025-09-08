@@ -3,7 +3,9 @@
 import config.Config;
 import io.netty.buffer.PooledByteBufAllocator;
 import loader.ConfigLoader;
+import manager.DynamicConfigManager;
 import netty.NettyHttpServer;
+import netty.processor.NettyCoreProcessor;
 import org.asynchttpclient.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,7 +29,7 @@ public class TestAsyncHttpClient {
     @Before
     public void before() {
         config = ConfigLoader.load(null);
-        nettyHttpServer = new NettyHttpServer(config, null);
+        nettyHttpServer = new NettyHttpServer(config, new NettyCoreProcessor());
         DefaultAsyncHttpClientConfig.Builder builder = new DefaultAsyncHttpClientConfig.Builder()
                 .setEventLoopGroup(nettyHttpServer.getEventLoopGroupWorker()) // 使用传入的Netty事件循环组
                 .setConnectTimeout(3000) // 连接超时设置
@@ -53,6 +55,13 @@ public class TestAsyncHttpClient {
         ListenableFuture<Response> execute = asyncHttpClient.prepareGet(url).execute();
         Response response1 = execute.get();
         System.out.println(response1.toString());
+    }
+
+    @Test
+    public void testNettyServer() {
+        nettyHttpServer.start();
+        DynamicConfigManager.getInstance().updateRoutes(config.getRoutes());
+        while(true) {}
     }
 
 }
