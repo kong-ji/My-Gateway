@@ -38,4 +38,24 @@ public class GatewayContext {
      */
     private RouteDefinition route;
 
+    /**
+     * 是否保持连接
+     * 如果为true，则连接会被保持，否则会在响应后关闭
+     */
+    private boolean keepAlive;
+
+    /**
+     * 初始化上下文
+     * @param nettyCtx Netty上下文
+     * @param request 网关请求
+     * @param route 网关请求
+     * @param keepAlive 是否保持连接
+     */
+    public GatewayContext(ChannelHandlerContext nettyCtx, GatewayRequest request,
+                          RouteDefinition route, boolean keepAlive) {
+        this.nettyCtx = nettyCtx;
+        this.request = request;
+        this.route = route;
+        this.keepAlive = keepAlive;
+    }
 }

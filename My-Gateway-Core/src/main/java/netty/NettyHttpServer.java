@@ -16,6 +16,7 @@ import io.netty.handler.codec.http.HttpObjectAggregator;
 import io.netty.handler.codec.http.HttpServerCodec;
 import io.netty.handler.codec.http.HttpServerExpectContinueHandler;
 import io.netty.util.concurrent.DefaultThreadFactory;
+import lombok.Data;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import netty.handler.NettyHttpServerHandler;
@@ -31,6 +32,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * 负责接收HTTP请求并将其交给处理器处理
  */
 @Slf4j
+@Data
 public class NettyHttpServer implements LifeCycle {
 
     // 网关配置对象，包含端口、线程数等配置

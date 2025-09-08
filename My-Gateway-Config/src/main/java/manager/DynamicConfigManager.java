@@ -18,7 +18,7 @@ public class DynamicConfigManager {
 
     private DynamicConfigManager() {}
 
-    public DynamicConfigManager getInstance() {
+    public static DynamicConfigManager getInstance() {
         return INSTANCE;
     }
 

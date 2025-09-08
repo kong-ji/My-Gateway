@@ -13,6 +13,7 @@ import java.util.*;
 
 import org.asynchttpclient.Request;
 import org.asynchttpclient.RequestBuilder;
+import pojo.ServiceDefinition;
 
 /**
  * 网关请求
@@ -22,9 +23,11 @@ import org.asynchttpclient.RequestBuilder;
 public class GatewayRequest {
 
     /**
-     * 请求的服务名
+     * 服务定义
+     * 包含服务的元数据信息，如服务名、状态等
+     * 用于服务发现和路由匹配
      */
-    private final String serviceName;
+    private final ServiceDefinition serviceDefinition;
 
     /**
      * 请求进入网关时间
@@ -102,22 +105,22 @@ public class GatewayRequest {
     private Map<String, List<String>> postParameters;
 
     /**
-     * 可修改的Scheme，默认是http://
+     * 下游的Scheme，默认是http://
      */
     private String modifyScheme;
 
     /**
-     * 可修改的Host
+     * 下游的Host
      */
     private String modifyHost;
 
     /**
-     * 可修改的path
+     * 下游的path
      */
     private String modifyPath;
 
-    public GatewayRequest(String serviceName, Charset charset, String clientIp, String host, String uri, HttpMethod method, String contentType, HttpHeaders headers, FullHttpRequest fullHttpRequest) {
-        this.serviceName = serviceName;
+    public GatewayRequest(ServiceDefinition serviceDefinition, Charset charset, String clientIp, String host, String uri, HttpMethod method, String contentType, HttpHeaders headers, FullHttpRequest fullHttpRequest) {
+        this.serviceDefinition = serviceDefinition;
         this.beginTime = System.currentTimeMillis();
         this.charset = charset;
         this.clientIp = clientIp;
