@@ -14,4 +14,44 @@
 
     <description>核心模块</description>
 
+    <dependencies>
+
+        <dependency>
+            <groupId>com.kongji</groupId>
+            <artifactId>My-Gateway-Common</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.kongji</groupId>
+            <artifactId>My-Gateway-Config</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.kongji</groupId>
+            <artifactId>My-Gateway-Register</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <!--netty-->
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>${netty.version}</version>
+        </dependency>
+
+        <!--http-->
+        <dependency>
+            <groupId>org.asynchttpclient</groupId>
+            <artifactId>async-http-client</artifactId>
+            <version>${async-http-client.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.asynchttpclient</groupId>
+            <artifactId>async-http-client-netty-utils</artifactId>
+            <version>${async-http-client.version}</version>
+        </dependency>
+
+    </dependencies>
 </project>
