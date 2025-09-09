@@ -130,6 +130,11 @@ public class GatewayRequest {
      */
     private String modifyPath;
 
+    /**
+     * 是否灰度
+     */
+    private boolean isGray;
+
     public GatewayRequest(ServiceDefinition serviceDefinition, Charset charset, String clientIp, String host, String uri, HttpMethod method, String contentType, HttpHeaders headers, FullHttpRequest fullHttpRequest) {
         this.id = LocalDateTime.now().format(DateTimeFormatter.ofPattern(DATE_DEFAULT_FORMATTER)) + "---" + UUID.randomUUID();
         this.serviceDefinition = serviceDefinition;

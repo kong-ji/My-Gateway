@@ -2,6 +2,9 @@ package filter;
 
 import context.GatewayContext;
 
+/**
+ * 过滤器接口
+ */
 public interface Filter {
 
     void doFilter(GatewayContext context);

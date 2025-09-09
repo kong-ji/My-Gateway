@@ -2,9 +2,10 @@ package pojo;
 
 import lombok.Data;
 
-import java.net.URI;
 import java.util.Set;
 import java.util.UUID;
+
+import static constant.GrayConstant.*;
 
 @Data
 public class RouteDefinition {
@@ -43,6 +44,24 @@ public class RouteDefinition {
          * 过滤器规则描述，json
          */
         private String config;
+
+        /**
+         * 是否启用过滤器
+         */
+        private boolean enable = true;
+    }
+    @Data
+    public static class GrayFilterConfig {
+
+        /**
+         * 灰度策略名，默认根据流量
+         */
+        private String strategyName = THRESHOLD_GRAY_STRATEGY;
+
+        /**
+         * 灰度流量最大比例
+         */
+        private double maxGrayThreshold = MAX_GRAY_THRESHOLD;
 
     }
 
