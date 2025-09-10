@@ -1,1 +1,5 @@
 filter.loadbalance.strategy.RoundRobinLoadBalanceStrategy
+filter.loadbalance.strategy.RoundRobinLoadBalanceStrategy
+filter.loadbalance.strategy.RandomLoadBalanceStrategy
+filter.loadbalance.strategy.WeightLoadBalanceStrategy
+filter.loadbalance.strategy.GrayLoadBalanceStrategy

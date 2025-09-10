@@ -6,6 +6,7 @@ import context.GatewayContext;
 import enums.ResponseCode;
 import exception.NotFoundException;
 import filter.Filter;
+import filter.loadbalance.strategy.GrayLoadBalanceStrategy;
 import filter.loadbalance.strategy.LoadBalanceStrategy;
 import manager.DynamicConfigManager;
 import pojo.RouteDefinition;
@@ -31,16 +32,19 @@ public class LoadBalanceFilter implements Filter {
         if (filterConfig == null) {
             filterConfig = FilterUtil.buildDefaultLoadBalanceFilterConfig();
         }
-        LoadBalanceStrategy strategy = selectLoadBalanceStrategy(JSONUtil.toBean(filterConfig.getConfig(), RouteDefinition.LoadBalanceFilterConfig.class));
 
         // 获取服务所有实例
         List<ServiceInstance> instances = DynamicConfigManager.getInstance()
                 .getInstancesByServiceName(context.getRequest().getServiceDefinition().getServiceName())
                 .values().stream().toList();
 
+        LoadBalanceStrategy strategy;
         if (context.getRequest().isGray()) {
+            strategy = new GrayLoadBalanceStrategy(); // 灰度负载均衡策略
             // 如果请求是灰度的，再进行一遍过滤
             instances = instances.stream().filter(instance -> instance.isEnabled() && instance.isGray()).toList();
+        } else {
+            strategy = selectLoadBalanceStrategy(JSONUtil.toBean(filterConfig.getConfig(), RouteDefinition.LoadBalanceFilterConfig.class));
         }
 
         if (instances.isEmpty()) {
