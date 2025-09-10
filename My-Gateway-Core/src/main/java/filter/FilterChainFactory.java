@@ -16,6 +16,7 @@ import static constant.FilterConstant.LOAD_BALANCE_FILTER_NAME;
 
 @Slf4j
 public class FilterChainFactory {
+
     /**
      * 存储网关的所有过滤器
      */
@@ -29,14 +30,14 @@ public class FilterChainFactory {
         }
     }
 
-    public static FilterChain buildFilterChain(GatewayContext ctx) {
+    public static void buildFilterChain(GatewayContext ctx) {
         FilterChain chain = new FilterChain();
 
         addPreFilter(chain);
         addFilter(chain, ctx.getRoute().getFilterConfigs());
         addPostFilter(chain);
 
-        return chain;
+        ctx.setFilterChain(chain);
     }
 
     private static void addPreFilter(FilterChain chain) {

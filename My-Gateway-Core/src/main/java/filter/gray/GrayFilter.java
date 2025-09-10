@@ -17,7 +17,7 @@ import static constant.FilterConstant.GRAY_FILTER_ORDER;
 public class GrayFilter implements Filter {
 
     @Override
-    public void doFilter(GatewayContext context) {
+    public void doPreFilter(GatewayContext context) {
         RouteDefinition.FilterConfig filterConfig = FilterUtil.findFilterConfigByName(context.getRoute().getFilterConfigs(), GRAY_FILTER_NAME);
         if (filterConfig == null) {
             filterConfig = FilterUtil.buildDefaultGrayFilterConfig();
@@ -40,6 +40,11 @@ public class GrayFilter implements Filter {
             context.getRequest().setGray(false);
         }
         //执行下一个过滤器... TODO
+    }
+
+    @Override
+    public void doPostFilter(GatewayContext context) {
+
     }
 
 

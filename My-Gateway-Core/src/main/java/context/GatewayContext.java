@@ -1,5 +1,6 @@
 package context;
 
+import filter.FilterChain;
 import io.netty.channel.ChannelHandlerContext;
 import lombok.Data;
 import pojo.RouteDefinition;
@@ -43,6 +44,12 @@ public class GatewayContext {
      * 如果为true，则连接会被保持，否则会在响应后关闭
      */
     private boolean keepAlive;
+
+    /**
+     * 过滤器链
+     * 包含所有要执行的过滤器
+     */
+    private FilterChain filterChain;
 
     /**
      * 初始化上下文

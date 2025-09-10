@@ -26,7 +26,7 @@ import static constant.FilterConstant.LOAD_BALANCE_FILTER_ORDER;
 public class LoadBalanceFilter implements Filter {
 
     @Override
-    public void doFilter(GatewayContext context) {
+    public void doPreFilter(GatewayContext context) {
         // 获取负载均衡策略
         RouteDefinition.FilterConfig filterConfig = FilterUtil.findFilterConfigByName(context.getRoute().getFilterConfigs(), LOAD_BALANCE_FILTER_NAME);
         if (filterConfig == null) {
@@ -55,6 +55,11 @@ public class LoadBalanceFilter implements Filter {
             throw new NotFoundException(ResponseCode.SERVICE_INSTANCE_NOT_FOUND);
         }
         context.getRequest().setModifyHost(serviceInstance.getIp() + ":" + serviceInstance.getPort());
+
+    }
+
+    @Override
+    public void doPostFilter(GatewayContext context) {
 
     }
 
