@@ -3,3 +3,5 @@ filter.loadbalance.strategy.RoundRobinLoadBalanceStrategy
 filter.loadbalance.strategy.RandomLoadBalanceStrategy
 filter.loadbalance.strategy.WeightLoadBalanceStrategy
 filter.loadbalance.strategy.GrayLoadBalanceStrategy
+filter.loadbalance.strategy.ClientIpLoadBalanceStrategy
+filter.loadbalance.strategy.ClientIpConsistentHashLoadBalanceStrategy

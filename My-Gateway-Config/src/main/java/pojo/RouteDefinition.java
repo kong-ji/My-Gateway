@@ -7,6 +7,7 @@ import java.util.UUID;
 
 import static constant.GrayConstant.*;
 import static constant.LoadBalanceConstant.ROUND_ROBIN_LOAD_BALANCE_STRATEGY;
+import static constant.LoadBalanceConstant.VIRTUAL_NODE_NUM;
 
 @Data
 public class RouteDefinition {
@@ -77,6 +78,11 @@ public class RouteDefinition {
          * 是否开启严格轮询
          */
         private boolean isStrictRoundRobin = true;
+
+        /**
+         * 一致性哈希算法虚拟节点个数
+         */
+        private int virtualNodeNum = VIRTUAL_NODE_NUM;
 
     }
 
