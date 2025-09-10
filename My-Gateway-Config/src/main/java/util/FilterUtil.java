@@ -78,6 +78,22 @@ public class FilterUtil {
         return filterConfig;
     }
 
-
+    /**
+     * 构建默认的负载均衡过滤器配置
+     * 用于在没有配置负载均衡过滤器时提供默认配置
+     *
+     * @return 默认的负载均衡过滤器配置
+     */
+    public static RouteDefinition.FilterConfig buildDefaultLoadBalanceFilterConfig() {
+        // 创建过滤器配置
+        RouteDefinition.FilterConfig filterConfig = new RouteDefinition.FilterConfig();
+        // 设置过滤器名称
+        filterConfig.setName(LOAD_BALANCE_FILTER_NAME);
+        // 启用过滤器
+        filterConfig.setEnable(true);
+        // 设置过滤器配置，使用默认的负载均衡过滤器配置
+        filterConfig.setConfig(JSONUtil.toJsonStr(new RouteDefinition.LoadBalanceFilterConfig()));
+        return filterConfig;
+    }
 
 }
