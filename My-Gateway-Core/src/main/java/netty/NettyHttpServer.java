@@ -1,8 +1,8 @@
 package netty;
 
 
-import ch.qos.logback.core.spi.LifeCycle;
 import config.Config;
+import config.LifeCycle;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelInitializer;
@@ -133,7 +133,7 @@ public class NettyHttpServer implements LifeCycle {
      * 关闭Netty服务器
      */
     @Override
-    public void stop() {
+    public void shutdown() {
         // 如果服务器未启动，则直接返回
         if (!start.get()) return;
 

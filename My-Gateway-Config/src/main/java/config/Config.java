@@ -53,6 +53,13 @@ public class Config {
     NettyConfig nettyConfig = new NettyConfig();
 
     /**
+     * HTTP客户端配置
+     * 包含HTTP客户端的连接池大小、超时时间等参数
+     * 用于配置网关转发请求时使用的HTTP客户端
+     */
+    private HttpClientConfig httpClient = new HttpClientConfig();
+
+    /**
      * 路由配置列表
      * 包含所有静态定义的路由规则
      * 每个路由规则定义了请求如何被转发到后端服务
